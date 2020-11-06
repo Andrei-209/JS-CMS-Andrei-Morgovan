@@ -10,14 +10,34 @@ const add = (table, item) => { // create
     data[table].push(item);
     return item;
 };
+const getBy = (table, key, value) => { //read by key
+    const item = data[table].find(item => item[key] === value);
+    return item;
+};
 const get = (table, id) => { // read
-    // @todo: scrie funcționalitatea
+    return getBy(table, 'id', id);
 };
 const set = (table, id, updatedItem) => { // update
-    // @todo: scrie funcționalitatea
+    const itemIndex = data[table].findIndex(item => item.id === id);
+
+    if (findIndex === -1) {
+        updatedItem.id = id;
+        data[table].push(updatedItem);
+        return updatedItem;
+    } else {
+        const item = data[table][itemIndex];
+        return item;
+    }
 };
 const remove = (table, id) => { // delete
-    // @todo: scrie funcționalitatea
+    const itemIndex = data[table].findIndex(item => item.id === id);
+    delete data[table][itemIndex];
+    if (itemIndex === -1) {
+        return false;
+    } else {
+        return itemIndex;
+    }
+
 };
 
 const getAll = (table) => {
@@ -27,4 +47,4 @@ const removeAll = (table) => {
     data[table] = [];
 };
 
-module.exports = {add, get, set, remove, getAll, removeAll};
+module.exports = { add, getBy, get, set, remove, getAll, removeAll };
